@@ -44,11 +44,16 @@ jobs:
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      # 5️⃣ 安装 Kustomize（直接二进制）
+      # 5️⃣ 安装 Kustomize
       - name: Install Kustomize
         run: |
           KUSTOMIZE_VERSION=v5.7.1
-          curl -L -o kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64
+          curl -L \
+            https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz \
+            -o kustomize.tar.gz
+
+          file kustomize.tar.gz
+          tar -xzf kustomize.tar.gz
           chmod +x kustomize
           sudo mv kustomize /usr/local/bin/
           kustomize version
