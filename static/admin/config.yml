@@ -1,0 +1,82 @@
+backend:
+  name: github
+  repo: plus-jia/gitops-blog
+  branch: main
+  commit_messages:
+    create: "cms: create {{collection}} {{slug}}"
+    update: "cms: update {{collection}} {{slug}}"
+    delete: "cms: delete {{collection}} {{slug}}"
+    uploadMedia: "cms: upload {{path}}"
+    deleteMedia: "cms: delete {{path}}"
+
+publish_mode: editorial_workflow
+media_folder: static/uploads
+public_folder: /uploads
+site_url: /
+display_url: /
+locale: zh_Hans
+
+collections:
+  - name: docs
+    label: 文档
+    label_singular: 文档
+    folder: docs
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    editor:
+      preview: false
+    fields:
+      - label: 标题
+        name: title
+        widget: string
+      - label: 侧边栏顺序
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+        required: false
+      - label: 正文
+        name: body
+        widget: markdown
+
+  - name: blog
+    label: 博客
+    label_singular: 博客文章
+    folder: blog
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    editor:
+      preview: false
+    fields:
+      - label: 标题
+        name: title
+        widget: string
+      - label: 描述
+        name: description
+        widget: text
+        required: false
+      - label: 作者
+        name: authors
+        widget: list
+        required: false
+        field:
+          label: 作者 ID
+          name: author
+          widget: string
+      - label: 标签
+        name: tags
+        widget: list
+        required: false
+        field:
+          label: 标签
+          name: tag
+          widget: string
+      - label: 正文
+        name: body
+        widget: markdown
