@@ -13,7 +13,7 @@ sidebar_position: 99
 2. 使用授权账号登录。
 3. 在「文档」或「博客」中新建内容。
 4. 点击发布。
-5. CMS 会把 Markdown 文件提交到 `main` 分支。
+5. CMS 会把 Markdown 文件提交到 `dev` 分支。
 6. GitHub Actions 自动构建镜像并更新 GitOps manifests 仓库。
 
 发布完成后，用户不需要接触源码、命令行或 Git。
@@ -24,7 +24,7 @@ sidebar_position: 99
 
 ```yaml
 repo: plus-jia/gitops-blog
-branch: main
+branch: dev
 ```
 
 如果仓库或默认分支变化，需要同步更新这里。

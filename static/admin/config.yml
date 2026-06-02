@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: plus-jia/gitops-blog
-  branch: main
+  branch: dev
   commit_messages:
     create: "cms: create {{collection}} {{slug}}"
     update: "cms: update {{collection}} {{slug}}"
