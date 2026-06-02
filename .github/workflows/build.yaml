@@ -8,8 +8,6 @@ on:
 env:
   REGISTRY: ghcr.io
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  # 如果 workflow 还报 Node 版本问题，可临时加下面一行
-  # ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:
   build:
@@ -46,10 +44,12 @@ jobs:
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      # 5️⃣ 安装 Kustomize
+      # 5️⃣ 安装 Kustomize（固定版本）
       - name: Install Kustomize
         run: |
-          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          KUSTOMIZE_VERSION=v5.7.1
+          curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz -o kustomize.tar.gz
+          tar -xzf kustomize.tar.gz
           sudo mv kustomize /usr/local/bin/
           kustomize version
 
