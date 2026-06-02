@@ -9,6 +9,7 @@ backend:
     uploadMedia: "cms: upload {{path}}"
     deleteMedia: "cms: delete {{path}}"
 
+local_backend: true
 publish_mode: editorial_workflow
 media_folder: static/uploads
 public_folder: /uploads

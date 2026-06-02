@@ -5,6 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start:host": "docusaurus start --host 0.0.0.0",
+    "cms:proxy": "BIND_HOST=127.0.0.1 decap-server",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -29,6 +31,7 @@
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
     "@types/react": "^19.0.0",
+    "decap-server": "^3.8.0",
     "typescript": "~6.0.2"
   },
   "browserslist": {

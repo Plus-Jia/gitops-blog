@@ -2,8 +2,7 @@
 title: CMS 后台
 sidebar_position: 99
 ---
-
-# CMS 后台
+# CMS 后台XXXX
 
 这个站点已经接入 Decap CMS，编辑人员可以通过浏览器创建和编辑 Markdown 内容。
 
@@ -37,12 +36,12 @@ Decap CMS 使用 GitHub 后端写入仓库。生产环境需要配置 OAuth 登�
 
 推荐权限模型：
 
-- 编辑人员只访问 `/admin/`。
-- 仓库写权限交给 CMS 后端或授权应用。
-- GitHub Actions 保持现有流程不变。
+* 编辑人员只访问 `/admin/`。
+* 仓库写权限交给 CMS 后端或授权应用。
+* GitHub Actions 保持现有流程不变。
 
 ## 内容目录
 
-- 文档发布到 `docs/`。
-- 博客发布到 `blog/`。
-- 上传文件保存到 `static/uploads/`，站点访问路径是 `/uploads/...`。
+* 文档发布到 `docs/`。
+* 博客发布到 `blog/`。
+* 上传文件保存到 `static/uploads/`，站点访问路径是 `/uploads/...`。
