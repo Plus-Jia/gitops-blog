@@ -37,5 +37,29 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Install Kustomize
+        run: |
+          curl -sLo kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v6.11.0/kustomize_v6.11.0_linux_amd64.tar.gz
+          tar -xzf kustomize.tar.gz
+          sudo mv kustomize /usr/local/bin/
+          kustomize version
+
+      - name: Clone manifests repo
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT_B }}@github.com/plus-jia/gitops-blog-manifests.git
+
+      - name: Update image tag using Kustomize
+        run: |
+          cd gitops-blog-manifests/overlays/dev
+          kustomize edit set image ghcr.io/plus-jia/gitops-blog=ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Commit and push changes to repo B
+        run: |
+          cd gitops-blog-manifests
+          git config user.name "github-actions"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add overlays/dev/kustomization.yaml
+          git commit -m "Update image to ${{ github.sha }}" || echo "No changes to commit"
+          git push
